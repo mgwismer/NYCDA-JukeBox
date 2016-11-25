@@ -2,25 +2,44 @@
 //songs.
 // npm install musicmetadata;
 
-var newSong = document.getElementsByClassName("SongList");
+// var newSong = document.getElementsByClassName("SongList");
 
-newSong[0].src = "data/TheScientist.mp3";
+// newSong[0].src = "data/TheScientist.mp3";
+// window.onload = StartJukeBox;
+console.log("js running")
+alert("js running");
+function func1() {
+  console.log("This is the first.");
+}
+window.onload=StartJukeBox();
 
-document.getElementById('fileInput').onchange = function(){
+function StartJukeBox() {
+	start = document.getElementsByClassName("start-button")[0];
+	start.addEventListener("click", function() {
+		var songs = [];
+		console.log("button clicked");
+		var inputBtn = document.getElementsByClassName("input-div")[0];
+		start.style.visibility = "hidden";
+		inputBtn.style.visibility = "visible"
+		InputSongs(inputBtn,songs);
+		console("From InputSongs");
+		console.log(songs);
+	})
+}
+
+function InputSongs(inbtn,lines) {
    var file = this.files[0];
-  var reader = new FileReader();
-  reader.onload = function(progressEvent){
-    // Entire file
-    alert(this.result);
-   // By lines
-    var lines = this.result.split('\n');
-    for(var line = 0; line < lines.length; line++){
-      alert(lines[line]);
-    }
-    console.log(lines);
-  };
-  reader.readAsText(file);
-};
+   var reader = new FileReader();
+   reader.onload = function(progressEvent,lines){
+      lines = this.result.split('\n');
+      lines.pop(); //blank entry at the end
+      console.log("in onload");
+      console.log(lines);
+     };
+   reader.readAsText(file);
+   console.log("after read");
+   console.log(lines);
+}
 
 function Jukebox(name) {
 	this.name = name;

@@ -2,27 +2,29 @@
 <html>
 <head>
 	<title></title>
+	<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <h1>My Jukebox </h1>
 
-<audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="SongList" controls loop>
+<!-- <audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="SongList" controls loop>
 <p>Your browser does not support the <code>audio</code> element.</p>
-</audio>
- <div>
+</audio> -->
+<h2> Let's get started </h2>
+<div class="start-div">
+   <input type="button" class="start-button" value="START">
+</div>
+<div class="input-div">
     Select a text file: 
-    <input type="file" id="fileInput">
- </div>
+    <input type="file" class="input-button" value="FileName">
+</div>
 <h4>File Data:</h4>
 <span id="result"/>
  <pre id="fileDisplayArea"></pre>
 
-</body>
 <script src="main.js" type="text/javascript">
-var fs = require("fs");
-fs.readFile("./mytext.txt", function(text){
-    var textByLine = text.split("\n")
-});
 </script>
+</body>
+
 
 </html>
