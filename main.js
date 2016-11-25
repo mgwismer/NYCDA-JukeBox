@@ -22,23 +22,25 @@ function StartJukeBox() {
 		start.style.visibility = "hidden";
 		inputBtn.style.visibility = "visible"
 		InputSongs(inputBtn,songs);
-		console("From InputSongs");
+		console.log("From InputSongs");
 		console.log(songs);
 	})
 }
 
 function InputSongs(inbtn,lines) {
+   document.getElementsByClassName("input-button")[0].onchange = function() {	
    var file = this.files[0];
    var reader = new FileReader();
-   reader.onload = function(progressEvent,lines){
-      lines = this.result.split('\n');
-      lines.pop(); //blank entry at the end
+   reader.onload = function(progressEvent){
+      var lines1 = this.result.split('\n');
+      lines1.pop(); //blank entry at the end
       console.log("in onload");
-      console.log(lines);
+      console.log(lines1);
      };
    reader.readAsText(file);
    console.log("after read");
    console.log(lines);
+   };
 }
 
 function Jukebox(name) {
