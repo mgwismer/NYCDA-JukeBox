@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<h1>My Jukebox </h1>
+
+<audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="SongList" controls loop>
+<p>Your browser does not support the <code>audio</code> element.</p>
+</audio>
+ <div>
+    Select a text file: 
+    <input type="file" id="fileInput">
+ </div>
+<h4>File Data:</h4>
+<span id="result"/>
+ <pre id="fileDisplayArea"></pre>
+
+</body>
+<script src="main.js" type="text/javascript">
+var fs = require("fs");
+fs.readFile("./mytext.txt", function(text){
+    var textByLine = text.split("\n")
+});
+</script>
+
+</html>
