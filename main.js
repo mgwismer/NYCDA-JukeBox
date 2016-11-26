@@ -6,41 +6,49 @@
 
 // newSong[0].src = "data/TheScientist.mp3";
 // window.onload = StartJukeBox;
-console.log("js running")
-alert("js running");
-function func1() {
-  console.log("This is the first.");
-}
-window.onload=StartJukeBox();
+lines = []
+window.onload=StartJukeBox(lines);
 
 function StartJukeBox() {
 	start = document.getElementsByClassName("start-button")[0];
 	start.addEventListener("click", function() {
 		var songs = [];
-		console.log("button clicked");
 		var inputBtn = document.getElementsByClassName("input-div")[0];
 		start.style.visibility = "hidden";
-		inputBtn.style.visibility = "visible"
-		InputSongs(inputBtn,songs);
-		console.log("From InputSongs");
+		inputBtn.style.visibility = "visible";
+		InputSongs(inputBtn,function(songs){
+			console.log(songs);
+		});
+		// console.log("From InputSongs");
 		console.log(songs);
 	})
 }
 
-function InputSongs(inbtn,lines) {
-   document.getElementsByClassName("input-button")[0].onchange = function() {	
+function InputSongs(inbtn,callback) {
+   document.getElementsByClassName("input-button")[0].onchange = function(lines) {	
    var file = this.files[0];
    var reader = new FileReader();
-   reader.onload = function(progressEvent){
-      var lines1 = this.result.split('\n');
-      lines1.pop(); //blank entry at the end
-      console.log("in onload");
-      console.log(lines1);
-     };
+   reader.onload = function(){ 
+   	callback(reader.result);
+   }
+     // var lines = this.result.split('\n');
+     // callback(lines);
+     // };
    reader.readAsText(file);
    console.log("after read");
-   console.log(lines);
+   console.log(this.result);
    };
+}
+
+function callback(result) {
+	var lines = result.split('\n');
+	return lines;
+}
+
+function createSongs(songs) {
+	for(var i = 0; i < songs.length; i++) {
+		var song = new Song(songs[i]);
+	}
 }
 
 function Jukebox(name) {
