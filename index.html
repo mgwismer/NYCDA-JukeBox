@@ -5,22 +5,38 @@
 	<link rel="stylesheet" href="style.css">
 </head>
 <body>
-<h1>My Jukebox </h1>
+<div class="headline-div">
+  <h1 class="headline">Create your own Juke Box </h1>
+</div>
 
-<!-- <audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="SongList" controls loop>
-<p>Your browser does not support the <code>audio</code> element.</p>
-</audio> -->
-<h2> Let's get started </h2>
+<h2 class="directive"> Let's get started </h2>
 <div class="start-div">
    <input type="button" class="start-button" value="START">
 </div>
 <div class="input-div">
-    Select a text file: 
+    Select the file with your songs
     <input type="file" class="input-button" value="FileName">
 </div>
-<h4>File Data:</h4>
-<span id="result"/>
- <pre id="fileDisplayArea"></pre>
+
+<div class="jukebox-display">
+  <audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="Song-mp3">
+<p>Your browser does not support the <code>audio</code> element.</p>
+  </audio>
+  <div class="jukebox-div play-div">
+     <input type="button" name="play" class="play-btn">
+  </div>
+  <div class="jukebox-div pause-div">
+     <input type="button" name="pause" class="pause-btn">    
+  </div>
+  <div class="jukebox-div songlist-div">
+    <form class="form-list">
+      <input type="button" class="select-btn" label="song1" name="song1">
+    </form>
+  </div>
+  <div class="jukebox-div random-div">
+  	<input type="button" name="random" class="rand-btn">
+  </div>
+</div>
 
 <script src="main.js" type="text/javascript">
 </script>

@@ -1,6 +1,32 @@
+body {
+   font-family: sans-serif;
+}
 .start-div {
 	display: block;
 	visibility: visible;
+}
+.headline-div {
+	width: 100%;
+	height: 100px;
+}
+
+.headline {
+	width: 100%;
+	text-align: center;
+	font-family: sans-serif;
+}
+
+.directive {
+	width: 100%;
+	padding: 20px;
+	display: block;
+	text-align: center;
+}
+
+.start-div {
+	width: 100%;
+	height: 100px;
+	display: block;
 }
 
 .start-button {
@@ -8,13 +34,54 @@
 	font-size: 30px;
 	width: 100px;
 	height: 50px;
+	display: block;
+	margin: 0 auto;
 	text-align: center;
 }
 
 .input-div {
 	visibility: hidden;
+	width: 200px;
+	display: block;
+	margin: 0 auto;
+	font-size: 20px;
 }
 
 .input-button {
 	size: 60;
 }
+
+.load-div {
+	display: block;
+	visibility: hidden;
+}
+
+.load-button {
+	background: yellow;
+	font-size: 30px;
+	width: 100px;
+	height: 50px;
+	text-align: center;
+}
+
+.jukebox-display {
+	width: 100%;
+	display: inline;
+	visibility: hidden;
+}
+
+.jukebox-div {
+	width: 25%;
+	display: inline-block;
+}
+
+.form-list {
+	width: 10px;
+	display: block;
+}
+
+/*.select-btn {
+	width: 10px;
+	float:left;
+}
+*/
