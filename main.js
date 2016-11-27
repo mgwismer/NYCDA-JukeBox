@@ -2,11 +2,11 @@
 //songs.
 // npm install musicmetadata;
 
-// var newSong = document.getElementsByClassName("SongList");
-
-// newSong[0].src = "data/TheScientist.mp3";
 // window.onload = StartJukeBox;
-
+var currSong = document.getElementsByClassName("Song-mp3")[0];
+console.log("first song");
+console.log(currSong.src);
+currSong.src = "data/Landslide.mp3";
 window.onload=StartJukeBox();
 
 function StartJukeBox(event) {
@@ -18,7 +18,6 @@ function StartJukeBox(event) {
 		start.style.visibility = "hidden";
 		//Makes visible the "choose file" button. Not easy to re-style this button
 		inputBtn.style.visibility = "visible";
-        //Reads the list of songs from a file the user chooses. "songs" is an array 
         //with the names of the songs as listed in the file user chooses. 
 		InputSongs(inputBtn,songs,function(songs) {
 			// console.log("after callback")
@@ -61,8 +60,9 @@ function RunJukeBox(inputBtn, songs) {
 	songlist = MakeSongList(songs);
 	myJukeBox.addSongs(songlist);
 	DisplayJukebox(myJukeBox);
-	console.log("separate songs");
-	console.log(songs[0]);
+	myJukeBox.selectSong();
+	// console.log("separate songs");
+	// console.log(songs[0]);
 	//This can be the play and pause and button
 //	LoadJukeBox(MakeSongList(songs),myJukeBox);
 //	myJukeBox.listsongs();
@@ -130,10 +130,27 @@ function Jukebox(name) {
 			console.log(this.songs[i].name);
 		}
 	}
-	this.chooseSong = function(song) {
-
+	this.selectSong = function() {
+		var currSong = document.getElementsByClassName("Song-mp3")[0];
+        var songBtns = document.getElementsByClassName("form-list")[0].elements;
+        // console.log("Song button");
+        // console.log(songBtns);
+        // console.log(currSong.src);
+        for (var i = 0; i < this.songs.length-2; i++) {
+           // console.log("index "+i);
+           console.log(this.songs[i].name);
+           tempName = this.songs[i].name;
+           songBtns[i].addEventListener("click", function(event){ 
+           	  event.preventDefault;
+           	  changeSong(i);
+           });
+        }
 	}
 }
+
+function changeSong(newName) {
+		console.log(newName);
+	}
 
 function Song(name) {
    this.artist = "unknown";
