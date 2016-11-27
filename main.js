@@ -61,7 +61,6 @@ function RunJukeBox(inputBtn, songs) {
 	songlist = MakeSongList(songs);
 	myJukeBox.addSongs(songlist);
 	DisplayJukebox(myJukeBox);
-	myJukeBox.listsongs();
 	console.log("separate songs");
 	console.log(songs[0]);
 	//This can be the play and pause and button
@@ -74,6 +73,8 @@ function DisplayJukebox(jukebox) {
     DisplayJukeboxControls(jukebox);
 }
 
+//changes the h1 heading and hides the START and 
+//choose file buttons.
 function ChangeHeading() {
 	var newGreeting = "Welcome to your Juke Box";
     var headline = document.getElementsByClassName('headline')[0];
@@ -84,18 +85,22 @@ function ChangeHeading() {
     temp.style.visibility = "hidden";
 }
 
+//Makes the jukeb0x-div visible
 function DisplayJukeboxControls(jukebox) {
 	CreateForm(jukebox);
     var temp = document.getElementsByClassName('jukebox-display')[0];
     temp.style.visibility = "visible";
 }
 
+//Creates the list of songs with buttons 
 function CreateForm(jukebox) {
 	for (var i = 0; i < jukebox.songs.length; i++) {
 	  form0 = document.forms[0]
         .appendChild(document.createElement("input"));
       form0.className = "select-btn";
       form0.type = "button";
+      form0.value = jukebox.songs[i].name;
+      // console.log(jukebox.songs[i].name)
 	}
 }
 function MakeSongList(songs) {
@@ -110,13 +115,6 @@ function MakeSongList(songs) {
 function LoadJukeBox(songlist, jukebox) {
     jukebox.addSongs(songlist);
 }
-
-function ShowLoadBtn(inputBtn) {
-	inputBtn.style.visibility = "hidden";
-	var loadBtn = document.getElementsByClassName("load-div")[0];
-    loadBtn.style.visibility = "visible";
-}
-
 
 function Jukebox(name) {
 	this.name = name;
@@ -137,8 +135,8 @@ function Jukebox(name) {
 	}
 }
 
-function Song(name, artist, type) {
-   this.artist = artist;
+function Song(name) {
+   this.artist = "unknown";
    this.name = name;
    this.type = "good";
    this.play = function playSong() {
