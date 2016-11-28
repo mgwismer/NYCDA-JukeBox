@@ -63,6 +63,8 @@ function RunJukeBox(songs) {
 	DisplayJukebox(myJukeBox);
 	myJukeBox.selectSong();
     myJukeBox.controlSong();
+    myJukeBox.randomSelect();
+    myJukeBox.listsongs();
 }
 
 function DisplayJukebox(jukebox) {
@@ -79,7 +81,7 @@ function ChangeHeading() {
     var temp = document.getElementsByClassName('input-div')[0];
     temp.style.visibility = "hidden";
     temp = document.getElementsByClassName('directive')[0];
-    temp.style.visibility = "hidden";
+    temp.innerHTML = "Choose a song";
 }
 
 //Makes the jukeb0x-div visible
@@ -87,8 +89,6 @@ function DisplayJukeboxList(jukebox) {
 	CreateForm(jukebox);
     var temp = document.getElementsByClassName('jukebox-display')[0];
     temp.style.visibility = "visible";
-    // var temp = document.getElementsByClassName('random-div')[0];
-    // temp.style.visibility = "visible";
 }
 
 //Creates the list of songs with buttons 
@@ -99,7 +99,6 @@ function CreateForm(jukebox) {
       form0.className = "select-btn";
       form0.type = "button";
       form0.value = jukebox.songs[i].name;
-      // console.log(jukebox.songs[i].name)
 	}
 }
 
@@ -109,6 +108,7 @@ function MakeSongList(songs) {
 		nextSong = new Song(songs[i]);
 		songlist.push(nextSong);
 		}
+    songlist.pop(); //added a blank song at end.
 	return songlist;
 }
 
@@ -133,21 +133,28 @@ function Jukebox(name) {
 	this.selectSong = function() {
 		var currSong = document.getElementsByClassName("Song-mp3")[0];
         var songBtns = document.getElementsByClassName("form-list")[0].elements;
-        // console.log("Song button");
-        // console.log(songBtns);
-        // console.log(currSong.src);
-        for (var i = 0; i < this.songs.length-1; i++) {
-           // console.log("index "+i);
-           console.log(this.songs[i].name);
-           tempName = this.songs[i].name;
+        var songmsg = document.getElementsByClassName("directive")[0];
+        for (var i = 0; i < this.songs.length; i++) {
            songBtns[i].addEventListener("click", function(event){ 
            	  //event.preventDefault;
            	  currSong.src="data/"+this.value+".mp3";
+           	  songmsg.innerHTML = this.value+".mp3";
            });
         }
 	}
 	this.randomSelect = function() {
 		var randBtn = document.getElementsByClassName("rand-btn")[0];
+		randBtn.num = this.songs.length;
+		randBtn.songs = this.songs;
+		randBtn.addEventListener("click", function(event){ 
+	         //this refers to the eventListener
+	          var currSong = document.getElementsByClassName("Song-mp3")[0];
+			  var songmsg = document.getElementsByClassName("directive")[0];
+			  console.log("in random "+this.num);
+           	  var rand = this.songs[Math.floor(Math.random()*this.num)];
+           	  currSong.src="data/"+rand.name+".mp3";
+           	  songmsg.innerHTML = rand.name+".mp3";
+           });
 	}
 
 	this.controlSong = function() {
@@ -174,4 +181,3 @@ function Song(name) {
    }
 }
 
-// var song1 = new Song
