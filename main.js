@@ -7,12 +7,12 @@
 // console.log("first song");
 // console.log(currSong.src);
 // currSong.src = "data/Landslide.mp3";
-window.onload=StartJukeBox();
+window.onload=CreateJukeBox();
 //Songs are loaded into the JukeBox through a user text file which
 //has a list of all the songs. User can add names to the list if the 
 //.mp3 file is in the data directory. Jukebox assumes all audio files 
 //are in the data directory.
-function StartJukeBox(event) {
+function CreateJukeBox(event) {
 	start = document.getElementsByClassName("start-button")[0];
 	var songs1 = [];
 	start.addEventListener("click", function(songs1) {
@@ -64,7 +64,7 @@ function RunJukeBox(songs) {
 	myJukeBox.selectSong();
     myJukeBox.controlSong();
     myJukeBox.randomSelect();
-    myJukeBox.listsongs();
+    myJukeBox.listsongs(); //not needed for the Jukebox
 }
 
 function DisplayJukebox(jukebox) {
