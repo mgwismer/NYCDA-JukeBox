@@ -57,49 +57,15 @@ function callback(result,lines) {
 function RunJukeBox(songs) {
 	var songList = [];
 	//For future make a function in which the user can input 
+	//different genres of songs
 	var myJukeBox = new Jukebox("Margaret's Tunes");
 	songlist = MakeSongList(songs);
 	myJukeBox.addSongs(songlist);
-	DisplayJukebox(myJukeBox);
+	myJukeBox.displayJukebox();
 	myJukeBox.selectSong();
     myJukeBox.controlSong();
     myJukeBox.randomSelect();
     myJukeBox.listsongs(); //not needed for the Jukebox
-}
-
-function DisplayJukebox(jukebox) {
-	ChangeHeading();
-    DisplayJukeboxList(jukebox);
-}
-
-//changes the h1 heading and hides the START and 
-//choose file buttons.
-function ChangeHeading() {
-	var newGreeting = "Welcome to your Juke Box";
-    var headline = document.getElementsByClassName('headline')[0];
-    headline.innerHTML = newGreeting;
-    var temp = document.getElementsByClassName('input-div')[0];
-    temp.style.visibility = "hidden";
-    temp = document.getElementsByClassName('directive')[0];
-    temp.innerHTML = "Choose a song";
-}
-
-//Makes the jukeb0x-div visible
-function DisplayJukeboxList(jukebox) {
-	CreateForm(jukebox);
-    var temp = document.getElementsByClassName('jukebox-display')[0];
-    temp.style.visibility = "visible";
-}
-
-//Creates the list of songs with buttons 
-function CreateForm(jukebox) {
-	for (var i = 0; i < jukebox.songs.length; i++) {
-	  form0 = document.forms[0]
-        .appendChild(document.createElement("input"));
-      form0.className = "select-btn";
-      form0.type = "button";
-      form0.value = jukebox.songs[i].name;
-	}
 }
 
 function MakeSongList(songs) {
@@ -110,10 +76,6 @@ function MakeSongList(songs) {
 		}
     songlist.pop(); //added a blank song at end.
 	return songlist;
-}
-
-function LoadJukeBox(songlist, jukebox) {
-    jukebox.addSongs(songlist);
 }
 
 function Jukebox(name) {
@@ -165,6 +127,40 @@ function Jukebox(name) {
 		 currSong.play() });
 	   pauseBtn.addEventListener("click",function() {
 		 currSong.pause() });
+    }
+//Revision follows this line to put the jukebox methods in the jukebox
+//object
+    this.displayJukebox = function() {
+       this.changeHeading();
+       this.displayJukeboxList();
+    }
+
+    this.changeHeading = function() {
+       var newGreeting = "Welcome to your Juke Box";
+       var headline = document.getElementsByClassName('headline')[0];
+       headline.innerHTML = newGreeting;
+       var temp = document.getElementsByClassName('input-div')[0];
+       temp.style.visibility = "hidden";
+       temp = document.getElementsByClassName('directive')[0];
+       temp.innerHTML = "Choose a song";
+    }
+
+    //Makes the jukebox-div visible
+    this.displayJukeboxList = function() {
+	   this.createForm();
+       var temp = document.getElementsByClassName('jukebox-display')[0];
+       temp.style.visibility = "visible";
+    }
+
+    //Creates the list of songs with buttons 
+    this.createForm = function() {
+	  for (var i = 0; i < this.songs.length; i++) {
+	    form0 = document.forms[0]
+          .appendChild(document.createElement("input"));
+        form0.className = "select-btn";
+        form0.type = "button";
+        form0.value = this.songs[i].name;
+	  }
     }
 }
 
