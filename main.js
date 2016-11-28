@@ -3,12 +3,15 @@
 // npm install musicmetadata;
 
 // window.onload = StartJukeBox;
-var currSong = document.getElementsByClassName("Song-mp3")[0];
-console.log("first song");
-console.log(currSong.src);
-currSong.src = "data/Landslide.mp3";
+// var currSong = document.getElementsByClassName("Song-mp3")[0];
+// console.log("first song");
+// console.log(currSong.src);
+// currSong.src = "data/Landslide.mp3";
 window.onload=StartJukeBox();
-
+//Songs are loaded into the JukeBox through a user text file which
+//has a list of all the songs. User can add names to the list if the 
+//.mp3 file is in the data directory. Jukebox assumes all audio files 
+//are in the data directory.
 function StartJukeBox(event) {
 	start = document.getElementsByClassName("start-button")[0];
 	var songs1 = [];
@@ -18,14 +21,12 @@ function StartJukeBox(event) {
 		start.style.visibility = "hidden";
 		//Makes visible the "choose file" button. Not easy to re-style this button
 		inputBtn.style.visibility = "visible";
-        //with the names of the songs as listed in the file user chooses. 
+        //Inputs the names of the songs as listed in the file user chooses. 
 		InputSongs(inputBtn,songs,function(songs) {
-			// console.log("after callback")
+			//Reads the list of songs into the songs1 array.
 			var songs1 = songs.split(".mp3\n");
-			//console.log(songs.split(".mp3\n")[0]);
-			console.log(songs1[0]);
 			//Most of the program runs in this function
-		    RunJukeBox(inputBtn, songs1);
+		    RunJukeBox(songs1);
 		});	
 	})
 }
@@ -53,7 +54,7 @@ function callback(result,lines) {
 
 //This is where the user interfaces with the Jukebox and can play songs
 //and list them.
-function RunJukeBox(inputBtn, songs) {
+function RunJukeBox(songs) {
 	var songList = [];
 	//For future make a function in which the user can input 
 	var myJukeBox = new Jukebox("Margaret's Tunes");
@@ -61,16 +62,12 @@ function RunJukeBox(inputBtn, songs) {
 	myJukeBox.addSongs(songlist);
 	DisplayJukebox(myJukeBox);
 	myJukeBox.selectSong();
-	// console.log("separate songs");
-	// console.log(songs[0]);
-	//This can be the play and pause and button
-//	LoadJukeBox(MakeSongList(songs),myJukeBox);
-//	myJukeBox.listsongs();
+    myJukeBox.controlSong();
 }
 
 function DisplayJukebox(jukebox) {
 	ChangeHeading();
-    DisplayJukeboxControls(jukebox);
+    DisplayJukeboxList(jukebox);
 }
 
 //changes the h1 heading and hides the START and 
@@ -86,10 +83,12 @@ function ChangeHeading() {
 }
 
 //Makes the jukeb0x-div visible
-function DisplayJukeboxControls(jukebox) {
+function DisplayJukeboxList(jukebox) {
 	CreateForm(jukebox);
     var temp = document.getElementsByClassName('jukebox-display')[0];
     temp.style.visibility = "visible";
+    // var temp = document.getElementsByClassName('random-div')[0];
+    // temp.style.visibility = "visible";
 }
 
 //Creates the list of songs with buttons 
@@ -103,6 +102,7 @@ function CreateForm(jukebox) {
       // console.log(jukebox.songs[i].name)
 	}
 }
+
 function MakeSongList(songs) {
 	songlist = []
 	for (var i = 0; i < songs.length; i++) {
@@ -136,21 +136,30 @@ function Jukebox(name) {
         // console.log("Song button");
         // console.log(songBtns);
         // console.log(currSong.src);
-        for (var i = 0; i < this.songs.length-2; i++) {
+        for (var i = 0; i < this.songs.length-1; i++) {
            // console.log("index "+i);
            console.log(this.songs[i].name);
            tempName = this.songs[i].name;
            songBtns[i].addEventListener("click", function(event){ 
-           	  event.preventDefault;
-           	  changeSong(i);
+           	  //event.preventDefault;
+           	  currSong.src="data/"+this.value+".mp3";
            });
         }
 	}
-}
-
-function changeSong(newName) {
-		console.log(newName);
+	this.randomSelect = function() {
+		var randBtn = document.getElementsByClassName("rand-btn")[0];
 	}
+
+	this.controlSong = function() {
+	   var currSong = document.getElementsByClassName("Song-mp3")[0];
+	   var playBtn = document.getElementsByClassName("play-btn")[0];
+	   var pauseBtn = document.getElementsByClassName("pause-btn")[0];
+	   playBtn.addEventListener("click",function() {
+		 currSong.play() });
+	   pauseBtn.addEventListener("click",function() {
+		 currSong.pause() });
+    }
+}
 
 function Song(name) {
    this.artist = "unknown";

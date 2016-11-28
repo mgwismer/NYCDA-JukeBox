@@ -19,14 +19,12 @@
 </div>
 
 <div class="jukebox-display">
-  <audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="Song-mp3" controls>
-<p>Your browser does not support the <code>audio</code> element.</p>
-  </audio>
+ 
   <div class="jukebox-div play-div">
-     <input type="button" name="play" class="play-btn" value="PLAY">
+     <input type="button" name="play" class="ctrl-btn play-btn" value="PLAY">
   </div>
   <div class="jukebox-div pause-div">
-     <input type="button" name="pause" class="pause-btn" value="PAUSE">    
+     <input type="button" name="pause" class="ctrl-btn pause-btn" value="PAUSE">    
   </div>
   <div class="jukebox-div songlist-div">
     <form class="form-list">
@@ -34,9 +32,13 @@
     </form>
   </div>
   <div class="jukebox-div random-div">
-  	<input type="button" name="random" class="rand-btn" value="RANDOM">
+  	<input type="button" name="random" class="ctrl-btn rand-btn" value="RANDOM">
   </div>
+    <audio src="data/HappyBirthday.mp3" type="audio/mpeg" class="Song-mp3">
+<p>Your browser does not support the <code>audio</code> element.</p>
+  </audio>
 </div>
+
 
 <script src="main.js" type="text/javascript">
 </script>

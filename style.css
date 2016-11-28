@@ -51,27 +51,19 @@ body {
 	size: 60;
 }
 
-.load-div {
-	display: block;
-	visibility: hidden;
-}
 
-.load-button {
-	background: yellow;
-	font-size: 30px;
-	width: 100px;
-	height: 50px;
-	text-align: center;
-}
 
 .jukebox-display {
 	width: 100%;
 	display: inline;
 	visibility: hidden;
+	margin-left: 30px;
+	position: relative;
+	bottom: 200px;
 }
 
 .jukebox-div {
-	width: 25%;
+	width: 20%;
 	display: inline-block;
 }
 
@@ -80,8 +72,17 @@ body {
 	display: block;
 }
 
-/*.select-btn {
-	width: 10px;
-	float:left;
+.ctrl-btn {
+	background: yellow;
+	font-size: 30px;
+	width: 120px;
+	height: 50px;
+	text-align: center;
+	position: relative;
+	bottom: 50px;
 }
-*/
+
+.select-btn {
+	font-size: 20px;
+	background: pink;
+}
